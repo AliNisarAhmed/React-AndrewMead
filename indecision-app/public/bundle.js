@@ -346,7 +346,79 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar template = _react2.default.createElement(\n  'p',\n  null,\n  'Helloooo there'\n);\n\n_reactDom2.default.render(template, document.getElementById('app'));\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _IndecisionApp = __webpack_require__(/*! ./components/IndecisionApp */ \"./src/components/IndecisionApp.js\");\n\nvar _IndecisionApp2 = _interopRequireDefault(_IndecisionApp);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_reactDom2.default.render(_react2.default.createElement(_IndecisionApp2.default, null), document.getElementById(\"app\"));\n\n//# sourceURL=webpack:///./src/app.js?");
+
+/***/ }),
+
+/***/ "./src/components/Action.js":
+/*!**********************************!*\
+  !*** ./src/components/Action.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Action = function Action(props) {\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      'button',\n      {\n        onClick: props.handlePick,\n        disabled: !props.hasOptions\n      },\n      'What should I do?'\n    )\n  );\n};\n\nexports.default = Action;\n\n//# sourceURL=webpack:///./src/components/Action.js?");
+
+/***/ }),
+
+/***/ "./src/components/AddOption.js":
+/*!*************************************!*\
+  !*** ./src/components/AddOption.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar AddOption = function (_React$Component) {\n  _inherits(AddOption, _React$Component);\n\n  function AddOption(props) {\n    _classCallCheck(this, AddOption);\n\n    var _this = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));\n\n    _this.handleAddOption = _this.handleAddOption.bind(_this);\n\n    _this.state = {\n      error: undefined\n    };\n    return _this;\n  }\n\n  _createClass(AddOption, [{\n    key: 'handleAddOption',\n    value: function handleAddOption(e) {\n      e.preventDefault();\n      var option = e.target.elements.option.value.trim();\n      var error = this.props.handleAddOption(option);\n\n      this.setState(function () {\n        return { error: error };\n      });\n\n      if (!error) {\n        e.target.elements.option.value = '';\n      }\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      return _react2.default.createElement(\n        'div',\n        null,\n        this.state.error && _react2.default.createElement(\n          'p',\n          null,\n          this.state.error\n        ),\n        _react2.default.createElement(\n          'form',\n          { action: '#', onSubmit: this.handleAddOption },\n          _react2.default.createElement('input', { type: 'text', name: 'option' }),\n          _react2.default.createElement(\n            'button',\n            null,\n            'Add Option'\n          )\n        )\n      );\n    }\n  }]);\n\n  return AddOption;\n}(_react2.default.Component);\n\nexports.default = AddOption;\n\n//# sourceURL=webpack:///./src/components/AddOption.js?");
+
+/***/ }),
+
+/***/ "./src/components/Header.js":
+/*!**********************************!*\
+  !*** ./src/components/Header.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Header = function Header(props) {\n  return _react2.default.createElement(\n    \"div\",\n    null,\n    _react2.default.createElement(\n      \"h1\",\n      null,\n      props.title\n    ),\n    props.subtitle && _react2.default.createElement(\n      \"h2\",\n      null,\n      props.subtitle\n    )\n  );\n};\n\nHeader.defaultProps = {\n  title: \"Indecision\"\n};\n\nexports.default = Header;\n\n//# sourceURL=webpack:///./src/components/Header.js?");
+
+/***/ }),
+
+/***/ "./src/components/IndecisionApp.js":
+/*!*****************************************!*\
+  !*** ./src/components/IndecisionApp.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _AddOption = __webpack_require__(/*! ./AddOption */ \"./src/components/AddOption.js\");\n\nvar _AddOption2 = _interopRequireDefault(_AddOption);\n\nvar _Header = __webpack_require__(/*! ./Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nvar _Action = __webpack_require__(/*! ./Action */ \"./src/components/Action.js\");\n\nvar _Action2 = _interopRequireDefault(_Action);\n\nvar _Options = __webpack_require__(/*! ./Options */ \"./src/components/Options.js\");\n\nvar _Options2 = _interopRequireDefault(_Options);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar IndecisionApp = function (_React$Component) {\n  _inherits(IndecisionApp, _React$Component);\n\n  function IndecisionApp(props) {\n    _classCallCheck(this, IndecisionApp);\n\n    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));\n\n    _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);\n    _this.handlePick = _this.handlePick.bind(_this);\n    _this.handleAddOption = _this.handleAddOption.bind(_this);\n    _this.handleRemoveOption = _this.handleRemoveOption.bind(_this);\n\n    _this.state = {\n      options: []\n    };\n    return _this;\n  }\n\n  _createClass(IndecisionApp, [{\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      try {\n        var json = localStorage.getItem('options');\n        var options = JSON.parse(json);\n        if (options) {\n          this.setState(function () {\n            return { options: options };\n          });\n        }\n      } catch (error) {\n        // Do nothing at all\n        // try catch is meant to catch anu errors such as invalid JSON to parse\n      }\n    }\n  }, {\n    key: 'componentDidUpdate',\n    value: function componentDidUpdate(prevProps, prevState) {\n      if (prevState.options.length !== this.state.options.length) {\n        console.log(\"saving data\");\n        var json = JSON.stringify(this.state.options);\n        localStorage.setItem('options', json);\n      }\n    }\n  }, {\n    key: 'handleDeleteOptions',\n    value: function handleDeleteOptions() {\n      this.setState(function () {\n        return { options: [] };\n      });\n    }\n  }, {\n    key: 'handleRemoveOption',\n    value: function handleRemoveOption(optionToRemove) {\n      this.setState(function (prevState) {\n        return { options: prevState.options.filter(function (opt) {\n            return opt !== optionToRemove;\n          }) };\n      });\n    }\n  }, {\n    key: 'handlePick',\n    value: function handlePick() {\n      var random = Math.floor(Math.random() * this.state.options.length);\n      alert(this.state.options[random]);\n    }\n  }, {\n    key: 'handleAddOption',\n    value: function handleAddOption(option) {\n      if (!option) {\n        return \"Enter valid value to add item\";\n      } else if (this.state.options.indexOf(option) !== -1) {\n        return \"This option is already in the list\";\n      }\n      this.setState(function (prevState) {\n        return { options: prevState.options.concat(option) };\n      });\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var subtitle = 'Put your life in the hands of a computer';\n\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(_Header2.default, { subtitle: subtitle }),\n        _react2.default.createElement(_Action2.default, {\n          hasOptions: this.state.options.length > 0,\n          handlePick: this.handlePick\n        }),\n        _react2.default.createElement(_Options2.default, {\n          options: this.state.options,\n          handleDeleteOptions: this.handleDeleteOptions,\n          handleRemoveOption: this.handleRemoveOption\n        }),\n        _react2.default.createElement(_AddOption2.default, {\n          handleAddOption: this.handleAddOption\n        })\n      );\n    }\n  }]);\n\n  return IndecisionApp;\n}(_react2.default.Component);\n\nexports.default = IndecisionApp;\n\n//# sourceURL=webpack:///./src/components/IndecisionApp.js?");
+
+/***/ }),
+
+/***/ "./src/components/Option.js":
+/*!**********************************!*\
+  !*** ./src/components/Option.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Option = function Option(props) {\n  return _react2.default.createElement(\n    'div',\n    null,\n    props.optionText,\n    _react2.default.createElement(\n      'button',\n      {\n        onClick: function onClick(e) {\n          props.handleRemoveOption(props.optionText);\n        }\n      },\n      'Remove'\n    )\n  );\n};\n\nexports.default = Option;\n\n//# sourceURL=webpack:///./src/components/Option.js?");
+
+/***/ }),
+
+/***/ "./src/components/Options.js":
+/*!***********************************!*\
+  !*** ./src/components/Options.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Option = __webpack_require__(/*! ./Option */ \"./src/components/Option.js\");\n\nvar _Option2 = _interopRequireDefault(_Option);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Options = function Options(props) {\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      'button',\n      { onClick: props.handleDeleteOptions },\n      'Remove All'\n    ),\n    props.options.length === 0 && _react2.default.createElement(\n      'p',\n      null,\n      'Please add an option to get started!'\n    ),\n    props.options.map(function (option) {\n      return _react2.default.createElement(_Option2.default, {\n        key: option,\n        optionText: option,\n        handleRemoveOption: props.handleRemoveOption\n      });\n    })\n  );\n};\n\nexports.default = Options;\n\n//# sourceURL=webpack:///./src/components/Options.js?");
 
 /***/ })
 
