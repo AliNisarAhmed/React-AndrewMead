@@ -13,6 +13,13 @@ module.exports = {
       loader:'babel-loader',
       test: /\.js$/,
       exclude: /node_modules/
+    }, {
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader'
+      ]
     }]
   },
   mode: 'development',
@@ -23,3 +30,5 @@ module.exports = {
 };
 
 // loader - enables to customize a file before loading
+
+// use - for multiple loaders
