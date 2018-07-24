@@ -25,10 +25,13 @@ module.exports = {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, "public")
+    contentBase: path.join(__dirname, "public"),
+    historyApiFallback: true
   }
 };
 
 // loader - enables to customize a file before loading
 
 // use - for multiple loaders
+
+//historyApiFallback: true - tells webpack that routing will be handled via client side routing and for webpack to return index.html everytime
