@@ -49,9 +49,26 @@ const setTextFilter = (text = '') => ({
 });
 
 // sort by date
+const sortByDate = () => ({
+  type: "SORT_BY_DATE",
+});
+
 // sort by amount
+const sortByAmount = () => ({
+  type: "SORT_BY_AMOUNT",
+});
+
 // set start date
+const setStartDate = (startDate) => ({
+  type: "SET_START_DATE",
+  startDate
+});
+
 // set end date
+const setEndDate = (endDate) => ({
+  type: "SET_END_DATE",
+  endDate
+});
 
 
 
@@ -102,7 +119,27 @@ const filtersReducer = (state = filtersDefaultState, action) => {
       return {
         ...state,
         text: action.text
-      }
+      };
+    case 'SORT_BY_DATE':
+      return {
+        ...state,
+        sortBy: 'date'
+      };
+    case 'SORT_BY_AMOUNT':
+      return {
+        ...state,
+        sortBy: 'amount'
+      };
+    case 'SET_START_DATE':
+      return {
+        ...state,
+        startDate: action.startDate
+      };
+    case 'SET_END_DATE':
+      return {
+        ...state,
+        endDate: action.endDate
+      };
     default:
       return state;
   }
@@ -121,17 +158,24 @@ store.subscribe(() => {
   console.log('store: ', store.getState());
 });
 
-const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));  // This dispatches the action to both reducers, expenses as well as filters
+// const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));  // This dispatches the action to both reducers, expenses as well as filters
 
-const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300 }));
+// const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300 }));
 
-store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+// store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
-store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+// store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
-store.dispatch(setTextFilter('rent'));
-store.dispatch(setTextFilter());
+// store.dispatch(setTextFilter('rent'));
+// store.dispatch(setTextFilter());
 
+// store.dispatch(sortByAmount());
+// store.dispatch(sortByDate());
+
+store.dispatch(setStartDate(125));
+store.dispatch(setStartDate());
+
+store.dispatch(setEndDate(1250));
 
 // DEMO STATE
 
