@@ -145,6 +145,21 @@ const filtersReducer = (state = filtersDefaultState, action) => {
   }
 };
 
+// TIMESTAMPS (milliseconds)
+// January 1, 1970 midnight (unix epoch)
+
+// GET FILTERED EXPENSES
+
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter(expense => {
+    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+
+    return startDateMatch && endDateMatch && textMatch;
+  });
+}; 
+
 // STore Creation
 
 const store = createStore(
@@ -155,27 +170,29 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log('store: ', store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
-// const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));  // This dispatches the action to both reducers, expenses as well as filters
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100, createdAt: 1000 }));  // This dispatches the action to both reducers, expenses as well as filters
 
-// const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300, createdAt: -1000 }));
 
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
-// store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter('rents'));
 // store.dispatch(setTextFilter());
 
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
+// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate());
 
-store.dispatch(setEndDate(1250));
+// store.dispatch(setEndDate(1250));
 
 // DEMO STATE
 
