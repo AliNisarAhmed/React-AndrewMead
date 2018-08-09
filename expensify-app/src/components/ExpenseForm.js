@@ -1,10 +1,19 @@
 import React from 'react';
+import moment from 'moment';
+import 'react-dates/initialize';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+
+// const now = moment();
+// console.log('now :', now.format('MMM Do, YYYY'));
 
 export default class ExpenseForm extends React.Component {
   state = {
     description: '',
     note: '',
-    amount: ''
+    amount: '',
+    createdAt: moment(),
+    calendarFocused: false
   }
 
   onDescriptionChange = (e) => {
@@ -25,10 +34,18 @@ export default class ExpenseForm extends React.Component {
 
   onAmountChange = (e) => {
     const amount = e.target.value;
-    if (amount.match(/^\d*(\.\d{0,2})?/)) {
+    if (amount.match(/^\d*(\.\d{0,2})?/)) {   // match only if it matches the pattern xxxx.xx
       this.setState(() => ({ amount }));
     }
-  }
+  };
+
+  onDateChange = (createdAt) => {
+    this.setState(() => ({ createdAt }));
+  };
+
+  onFocusChange = ({ focused }) => {   // focused is the value that comes back from the component depending on whether calendar is focused or not
+    this.setState(() => ({ calendarFocused: focused }));
+  };
 
   render() {
     return (
@@ -46,6 +63,14 @@ export default class ExpenseForm extends React.Component {
             placeholder="Amount"
             value={this.state.amount}
             onChange={this.onAmountChange}
+          />
+          <SingleDatePicker   // from react-dates
+            date={this.state.createdAt}  // moment object where you want to start the dates
+            onDateChange={this.onDateChange}  
+            focused={this.state.calendarFocused}
+            onFocusChange={this.onFocusChange}
+            numberOfMonths={1}
+            isOutsideRange={() => false}  // this makes everyday in the past available to us, we can pass a day argument to the function to choose days we like
           />
           <textarea
             placeholder="Add a note for your expense (optional)"
