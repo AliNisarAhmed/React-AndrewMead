@@ -13,7 +13,8 @@ export default class ExpenseForm extends React.Component {
     note: '',
     amount: '',
     createdAt: moment(),
-    calendarFocused: false
+    calendarFocused: false,
+    error: ''
   }
 
   onDescriptionChange = (e) => {
@@ -34,23 +35,45 @@ export default class ExpenseForm extends React.Component {
 
   onAmountChange = (e) => {
     const amount = e.target.value;
-    if (amount.match(/^\d*(\.\d{0,2})?/)) {   // match only if it matches the pattern xxxx.xx
+    if (!amount || amount.match(/^\d+(\.\d{0,2})?/)) {   // match only if it matches the pattern xxxx.xx
+      // !amount above allows us to clear the field, without it the regex never matches the empty input field
       this.setState(() => ({ amount }));
     }
   };
 
   onDateChange = (createdAt) => {
-    this.setState(() => ({ createdAt }));
+    if(createdAt) {  // this if statement prevents the user from clearing the date field 
+      this.setState(() => ({ createdAt }));
+    }
   };
 
   onFocusChange = ({ focused }) => {   // focused is the value that comes back from the component depending on whether calendar is focused or not
     this.setState(() => ({ calendarFocused: focused }));
   };
 
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!this.state.description || !this.state.amount) {
+      // Set error state equal to 'Please provide description and amount'
+      this.setState(() => ({ error: 'Please provide description and amount' }));
+    } else {
+      // Clear the error
+      this.setState(() => ({ error: '' }));
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),  // to convert to unix time
+        note: this.state.note
+      });
+    }
+  } 
+
   render() {
     return (
       <div>
-        <form>
+        {this.state.error && <p>{this.state.error}!</p>}
+        <form onSubmit={this.onSubmit}>
           <input 
             type="text"
             placeholder="Description"
