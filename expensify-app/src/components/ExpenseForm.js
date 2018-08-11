@@ -8,14 +8,21 @@ import 'react-dates/lib/css/_datepicker.css';
 // console.log('now :', now.format('MMM Do, YYYY'));
 
 export default class ExpenseForm extends React.Component {
-  state = {
-    description: '',
-    note: '',
-    amount: '',
-    createdAt: moment(),
-    calendarFocused: false,
-    error: ''
+  // To check whether an expense prop was sent down thru the ExpenseForm, we have to use the contructor method to define state, so that we use the expense object as the default state if it is passed down, but use default values if there is no expense object passed down as prop (which will be the case only when ExpenseForm is being used in the context of AddNewExpense)
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      description: props.expense ? props.expense.description : '',
+      note: props.expense ? props.expense.note : '',
+      amount: props.expense ? (props.expense.amount / 100).toString() : '',
+      createdAt: props.expense ? moment(props.expense.createdAt): moment(),
+      calendarFocused: false,
+      error: ''
+    }
   }
+
 
   onDescriptionChange = (e) => {
     const description = e.target.value;
@@ -60,7 +67,7 @@ export default class ExpenseForm extends React.Component {
     } else {
       // Clear the error
       this.setState(() => ({ error: '' }));
-      this.props.onSubmit({
+      this.props.onSubmit({  // This is the onSubmit from the props, used to pass in the location of the redirect link, as well as the expense object so that it can be dispatched to the store.
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
         createdAt: this.state.createdAt.valueOf(),  // to convert to unix time

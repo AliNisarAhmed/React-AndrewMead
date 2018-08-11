@@ -1,20 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { removeExpense } from '../actions/expenses';
+import { Link } from 'react-router-dom';
 
-const ExpenseListItem = ({ dispatch, id, description, amount, createdAt }) => (
+const ExpenseListItem = ({ id, description, amount, createdAt, history }) => (
   <div>
-    <h3>{description}</h3>
+    <Link to={`/edit/${id}`}>
+      <h3>{description}</h3>
+    </Link>
     <p>Amount: {amount} </p>
     <p>Dated: {createdAt}</p>
-    <button 
-      onClick={() => {
-        dispatch(removeExpense({ id }));
-      }}
-    >
-    Remove
-    </button>
   </div>
 );  
 
-export default connect()(ExpenseListItem);
+export default ExpenseListItem;  // connect can now be reomved as react-router functionality is not used in this component now

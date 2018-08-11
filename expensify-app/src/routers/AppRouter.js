@@ -13,6 +13,8 @@ import Header from '../components/Header';
 
 // Whereas <Link> is better for generic link pages
 
+/* BrowserRouter can only take on component or element as child, hence <div></div>*/
+
 const AppRouter = () => (
   <BrowserRouter>
     <div>
