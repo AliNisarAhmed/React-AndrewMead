@@ -1,12 +1,14 @@
+import moment from 'moment'
 
+// We now want the default values of the start and end dates to be the current month, so that only current month's expesnses are shown at startup
 
 // Filters Reducer
 
 const filtersDefaultState = {
   text: '',
   sortBy: 'date',
-  startDate: undefined,
-  endDate: undefined
+  startDate: moment().startOf('month'),
+  endDate: moment().endOf('month')
 };
 
 
