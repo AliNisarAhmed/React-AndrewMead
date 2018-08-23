@@ -41,7 +41,7 @@ export default class ExpenseForm extends React.Component {
 
   onAmountChange = (e) => {
     const amount = e.target.value;
-    if (!amount || amount.match(/^\d+(\.\d{0,2})?/)) {   // match only if it matches the pattern xxxx.xx
+    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {   // match only if it matches the pattern xxxx.xx
       // !amount above allows us to clear the field, without it the regex never matches the empty input field
       this.setState(() => ({ amount }));
     }
