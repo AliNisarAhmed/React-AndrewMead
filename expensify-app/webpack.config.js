@@ -2,33 +2,67 @@
 
 const path = require("path");
 
-module.exports = {
-  entry: "./src/app.js",
-  output: {
-    path: path.join(__dirname, "public"),
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [{
-      loader:'babel-loader',
-      test: /\.js$/,
-      exclude: /node_modules/
-    }, {
-      test: /\.s?css$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'sass-loader'
-      ]
-    }]
-  },
-  mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    historyApiFallback: true
-  }
-};
+// instead of an object, we export a function from this file, this is because this function comes with the env argument
+
+module.exports = (env) => {
+  const isProduction = env === 'production';
+
+  return {
+    entry: "./src/app.js",
+    output: {
+      path: path.join(__dirname, "public"),
+      filename: 'bundle.js'
+    },
+    module: {
+      rules: [{
+        loader:'babel-loader',
+        test: /\.js$/,
+        exclude: /node_modules/
+      }, {
+        test: /\.s?css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }]
+    },
+    mode: 'development',
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+    devServer: {
+      contentBase: path.join(__dirname, "public"),
+      historyApiFallback: true
+    }
+  };
+}
+
+// module.exports = {
+//   entry: "./src/app.js",
+//   output: {
+//     path: path.join(__dirname, "public"),
+//     filename: 'bundle.js'
+//   },
+//   module: {
+//     rules: [{
+//       loader:'babel-loader',
+//       test: /\.js$/,
+//       exclude: /node_modules/
+//     }, {
+//       test: /\.s?css$/,
+//       use: [
+//         'style-loader',
+//         'css-loader',
+//         'sass-loader'
+//       ]
+//     }]
+//   },
+//   mode: 'development',
+//   devtool: 'cheap-module-eval-source-map',
+//   devServer: {
+//     contentBase: path.join(__dirname, "public"),
+//     historyApiFallback: true
+//   }
+// };
 
 // loader - enables to customize a file before loading
 
