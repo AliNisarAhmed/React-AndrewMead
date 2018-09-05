@@ -2,6 +2,8 @@
 
 const path = require("path");
 
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+
 // instead of an object, we export a function from this file, this is because this function comes with the env argument
 
 module.exports = (env) => {
@@ -21,14 +23,29 @@ module.exports = (env) => {
       }, {
         test: /\.s?css$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
+          MiniCSSExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       }]
     },
+    plugins: [
+      new MiniCSSExtractPlugin({
+        filename: 'styles.css'
+      })
+    ],
     mode: 'development',
-    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, "public"),
       historyApiFallback: true
