@@ -11,7 +11,7 @@ app.use(express.static(publicPath));
 app.get('*', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
-
+/*Thanks for helping me understand  basic react concepts with this code base*/
 app.listen(port, () => {
   console.log('server is running');
 });
